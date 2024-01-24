@@ -6,7 +6,7 @@ import PopUpProvider from "../../context/PopUpContext";
 const Layout = ({ children }) => {
 	return (
 		<PopUpProvider>
-			<div className="bg-[#191D26] font-[Inter] text-white">
+			<div className="bg-[#191D26] font-[Inter] text-white min-h-screen">
 				<Header />
 				{children}
 				<Footer />

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const PopUp = ({ children, isOpen, setOpen, open_style, close_style }) => {
+const PopUp = ({ children, isOpen, onClosePopup, open_style, close_style }) => {
 	return (
 		<div
 			className={`  fixed top-0 left-0 right-0 w-screen h-screen overflow-y-auto bg-white z-[60] bg-opacity-30 !mx-0 ${
@@ -11,7 +11,7 @@ const PopUp = ({ children, isOpen, setOpen, open_style, close_style }) => {
 				className=" absolute  right-10 top-0 p-3 hover:text-red-400 duration-300 "
 				onClick={(e) => {
 					e.stopPropagation();
-					setOpen(!isOpen);
+					onClosePopup();
 				}}
 			>
 				<svg

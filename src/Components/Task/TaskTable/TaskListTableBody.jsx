@@ -1,13 +1,16 @@
+import { useTaskList } from "../../../context/TaskContext";
 import TaskRow from "./TaskRow";
 
 const TaskListTableBody = () => {
+	const tasks = useTaskList();
 	return (
 		<tbody>
-			<TaskRow />
-			<TaskRow />
-			<TaskRow />
-			<TaskRow />
-			<TaskRow />
+			{tasks?.map((task) => (
+				<TaskRow
+					key={task?.id}
+					task={task}
+				/>
+			))}
 		</tbody>
 	);
 };

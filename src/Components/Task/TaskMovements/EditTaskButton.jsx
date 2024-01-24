@@ -1,17 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useTaskDispatch } from "../../../context/TaskContext";
 import PopUp from "../../../containers/PopUp";
-import NewTaskForm from "../NewTaskForm";
+import TaskEditForm from "../TaskEditForm";
 
-const AddNewTask = () => {
+const EditTaskButton = ({ task }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+
 	return (
 		<>
 			{/* Add Task button */}
 			<button
-				className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold"
+				className="text-blue-500"
 				onClick={() => setIsPopupOpen(!isPopupOpen)}
 			>
-				Add Task
+				Edit
 			</button>
 
 			{/* TaskFromOpu */}
@@ -23,13 +25,14 @@ const AddNewTask = () => {
 				open_style={"translate-x-[0%]"}
 				close_style={"translate-x-[100%]"}
 			>
-				<NewTaskForm
+				<TaskEditForm
 					closeForm={() => setIsPopupOpen(false)}
+					selected_task={task}
 				/>
 			</PopUp>
 		</>
 	);
 };
 
-export default AddNewTask;
+export default EditTaskButton;
 
