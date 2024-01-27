@@ -15,18 +15,28 @@ const AlertProvider = ({ children }) => {
 	const [isAlertOpen, setIsAlertOpen] = useState(false);
 	const [alert_message, setAlertMessage] = useState(" ");
 	const [alert_type, setAlertType] = useState("success");
+	let timerId;
 
 	const handleOpenAlert = ({ type, message }) => {
+		// Clear the previous timer if it exists
+		if (timerId) {
+			clearTimeout(timerId);
+		}
+
 		setIsAlertOpen(true);
 		setAlertMessage(message);
 		setAlertType(type ?? "success");
 		// Close the alert automatically after 3000 milliseconds (adjust as needed)
-		setTimeout(() => {
+		// Set a new timer
+		timerId = setTimeout(() => {
 			setIsAlertOpen(false);
 			setAlertMessage("");
 		}, 3000);
 	};
 	const handleCloseAlert = () => {
+		if (timerId) {
+			clearTimeout(timerId);
+		}
 		setIsAlertOpen(false);
 		setAlertMessage("");
 	};
