@@ -1,45 +1,32 @@
 import { useState } from "react";
-import TaskForm from "./TaskForm/TaskForm";
 import { useTaskDispatch, useTaskList } from "../../context/TaskContext";
 import { get_next_id } from "../../utils/NextId";
+import TaskForm from "./TaskForm/TaskForm";
 import { useAlert } from "../../context/AlertContext";
 
-const NewTaskForm = ({ closeForm }) => {
+const TaskEditForm = ({ closeForm, selected_task }) => {
 	const task_dispatch = useTaskDispatch();
-	const task_list = useTaskList();
 	const handleOpenAlert = useAlert();
 
 	// task state
 	const [task_form, setTaskForm] = useState({
-		title: " ",
-		is_finished: false,
-		description: "",
-		tags: "",
-		priority: "",
+		title: selected_task?.title,
+		is_finished: selected_task.is_finished,
+		description: selected_task.description,
+		tags: selected_task?.tags,
+		priority: selected_task?.priority,
 	});
 
-	//
+	//onFormSubmit
 	const onFormSubmit = () => {
 		task_dispatch({
-			action_type: "add_new_task",
-			id: get_next_id({ prev_data_list: task_list }),
+			action_type: "edit_single_task_by_id",
+			id: selected_task?.id,
 			...task_form,
 		});
 
 		//
 		closeForm();
-		clearState();
-	};
-
-	// clear state
-	const clearState = () => {
-		setTaskForm({
-			title: " ",
-			is_finished: false,
-			description: "",
-			tags: "",
-			priority: "",
-		});
 	};
 
 	// startFormChecking
@@ -56,6 +43,7 @@ const NewTaskForm = ({ closeForm }) => {
 					type: "error",
 					message: `Please enter the value of ${key} field`,
 				});
+				console.log(document.getElementById(key));
 				document.getElementById(key).focus();
 				break;
 			} else {
@@ -74,10 +62,11 @@ const NewTaskForm = ({ closeForm }) => {
 				task_state={task_form}
 				setTaskState={setTaskForm}
 				onFormSubmit={startFormChecking}
+				isTaskEditing={true}
 			/>
 		</>
 	);
 };
 
-export default NewTaskForm;
+export default TaskEditForm;
 

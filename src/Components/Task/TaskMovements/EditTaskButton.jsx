@@ -1,9 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useTaskDispatch } from "../../../context/TaskContext";
 import PopUp from "../../../containers/PopUp";
-import NewTaskForm from "../NewTaskForm";
+import TaskEditForm from "../TaskEditForm";
+import Alert from "../../../containers/Alert";
 import { useAlert } from "../../../context/AlertContext";
 
-const AddNewTask = () => {
+const EditTaskButton = ({ task }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const handleOpenAlert = useAlert();
 
@@ -11,37 +13,38 @@ const AddNewTask = () => {
 		<>
 			{/* Add Task button */}
 			<button
-				className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold"
+				className="text-blue-500"
 				onClick={() => setIsPopupOpen(!isPopupOpen)}
 			>
-				Add Task
+				Edit
 			</button>
 
-			{/* TaskFrom open popup */}
+			{/* Edit task form open */}
 			<PopUp
 				isOpen={isPopupOpen}
 				onClosePopup={() => {
 					setIsPopupOpen(!isPopupOpen);
 				}}
 				open_style={"translate-x-[0%]"}
-				close_style={"translate-x-[100%]"}
+				close_style={"-translate-x-[100%]"}
 				children_component_style={
 					" max-w-[740px] w-full h-auto  relative mx-auto my-auto"
 				}
 			>
-				<NewTaskForm
+				<TaskEditForm
 					closeForm={() => {
 						setIsPopupOpen(false);
 						handleOpenAlert({
-							message: "Task added successfully",
+							message: "Task updated successfully",
 							type: "success",
 						});
 					}}
+					selected_task={task}
 				/>
 			</PopUp>
 		</>
 	);
 };
 
-export default AddNewTask;
+export default EditTaskButton;
 

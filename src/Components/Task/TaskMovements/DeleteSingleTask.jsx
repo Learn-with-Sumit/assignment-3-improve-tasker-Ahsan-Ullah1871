@@ -1,35 +1,30 @@
-import { useState } from "react";
-import { useTaskDispatch, useTaskList } from "../../../context/TaskContext";
-import PopUp from "../../../containers/PopUp";
 import ConfirmationCard from "../../../containers/ConfirmationCard";
+import PopUp from "../../../containers/PopUp";
 import { useAlert } from "../../../context/AlertContext";
+import { useTaskDispatch, useTaskList } from "../../../context/TaskContext";
+import { useState } from "react";
 
-const DeleteAllTasks = () => {
+const DeleteSingleTask = ({ task_title, task_id }) => {
 	const task_dispatch = useTaskDispatch();
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 	const handleOpenAlert = useAlert();
 	const tasks = useTaskList();
-
 	return (
 		<>
-			{/* Delete All Task button */}
+			{/* Delete   Task button */}
+
 			<button
-				className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold"
+				className="text-red-500"
 				onClick={() => {
 					if (tasks.length > 0) {
 						setIsPopupOpen(true);
-					} else {
-						handleOpenAlert({
-							message: "There are no tasks to delete at the moment",
-							type: "error",
-						});
 					}
 				}}
 			>
-				Delete All
+				Delete
 			</button>
 
-			{/* TaskFromOpu */}
+			{/* Confirmation popup */}
 			<PopUp
 				isOpen={isPopupOpen}
 				onClosePopup={() => {
@@ -42,20 +37,19 @@ const DeleteAllTasks = () => {
 				}
 			>
 				<ConfirmationCard
-					heading={"Delete All tasks"}
-					desc={
-						"Are you sure you want to delete all tasks? This action is irreversible and will remove all your current tasks. Please confirm if you wish to proceed. Once deleted, the tasks cannot be recovered."
-					}
-					image_url={"/assets/delete_all.png"}
-					button_title={"Confirm"}
+					heading={"Delete selected task"}
+					desc={`Are you sure you want to delete this "${task_title}" task? This action is irreversible and will remove  this current task. Please confirm if you wish to proceed. Once deleted, the tasks cannot be recovered.`}
+					image_url={"/assets/delete.png"}
+					button_title={`Confirm  `}
 					onPrimaryButtonCLick={() => {
 						task_dispatch({
 							action_type:
-								"delete_all_tasks",
+								"delete_single_task_by_id",
+							id: task_id,
 						});
 						setIsPopupOpen(false);
 						handleOpenAlert({
-							message: "All Tasks deleted successfully",
+							message: "  Task deleted successfully",
 							type: "success",
 						});
 					}}
@@ -65,5 +59,5 @@ const DeleteAllTasks = () => {
 	);
 };
 
-export default DeleteAllTasks;
+export default DeleteSingleTask;
 

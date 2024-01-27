@@ -1,8 +1,21 @@
-const TaskForm = () => {
+import { priority_list } from "../../../utils/PriorityList";
+
+const TaskForm = ({
+	task_state,
+	setTaskState,
+	onFormSubmit,
+	isTaskEditing,
+}) => {
+	const updateHandler = ({ key_name, value }) => {
+		setTaskState({ ...task_state, [key_name]: value });
+	};
 	return (
-		<form className="mx-auto my-10 w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11">
+		<form
+			className="mx-auto   w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4   lg:p-11"
+			onSubmit={onFormSubmit}
+		>
 			<h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
-				Add New Task
+				{isTaskEditing ? "Edit Task" : "Add New Task"}
 			</h2>
 
 			<div className="space-y-9 text-white lg:space-y-10">
@@ -13,7 +26,13 @@ const TaskForm = () => {
 						type="text"
 						name="title"
 						id="title"
-						required
+						value={task_state?.title}
+						onChange={(e) =>
+							updateHandler({
+								key_name: "title",
+								value: e.target.value,
+							})
+						}
 					/>
 				</div>
 
@@ -26,7 +45,13 @@ const TaskForm = () => {
 						type="text"
 						name="description"
 						id="description"
-						required
+						value={task_state?.description}
+						onChange={(e) =>
+							updateHandler({
+								key_name: "description",
+								value: e.target.value,
+							})
+						}
 					></textarea>
 				</div>
 
@@ -38,7 +63,14 @@ const TaskForm = () => {
 							type="text"
 							name="tags"
 							id="tags"
-							required
+							value={task_state?.tags}
+							onChange={(e) =>
+								updateHandler({
+									key_name: "tags",
+									value: e.target
+										.value,
+								})
+							}
 						/>
 					</div>
 
@@ -50,20 +82,38 @@ const TaskForm = () => {
 							className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
 							name="priority"
 							id="priority"
-							required
+							onChange={(e) =>
+								updateHandler({
+									key_name: "priority",
+									value: e.target
+										.value,
+								})
+							}
 						>
-							<option value="">
+							<option
+								selected
+								value=""
+							>
 								Select Priority
 							</option>
-							<option value="low">
-								Low
-							</option>
-							<option value="medium">
-								Medium
-							</option>
-							<option value="high">
-								High
-							</option>
+							{priority_list?.map((pr) => {
+								return (
+									<option
+										value={
+											pr.value
+										}
+										key={
+											pr.value
+										}
+										selected={
+											pr.value ===
+											task_state?.priority
+										}
+									>
+										{pr.label}
+									</option>
+								);
+							})}
 						</select>
 					</div>
 				</div>
@@ -74,7 +124,9 @@ const TaskForm = () => {
 					type="submit"
 					className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
 				>
-					Create new Task
+					{isTaskEditing
+						? "Update task"
+						: "Create new Task"}
 				</button>
 			</div>
 		</form>
