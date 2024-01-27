@@ -43,7 +43,8 @@ const TaskEditForm = ({ closeForm, selected_task }) => {
 					type: "error",
 					message: `Please enter the value of ${key} field`,
 				});
-
+				console.log(document.getElementById(key));
+				document.getElementById(key).focus();
 				break;
 			} else {
 				check_items++;

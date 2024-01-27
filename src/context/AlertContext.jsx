@@ -24,11 +24,10 @@ const AlertProvider = ({ children }) => {
 		setTimeout(() => {
 			setIsAlertOpen(false);
 			setAlertMessage("");
-		}, 5000);
+		}, 3000);
 	};
 	const handleCloseAlert = () => {
 		setIsAlertOpen(false);
-
 		setAlertMessage("");
 	};
 

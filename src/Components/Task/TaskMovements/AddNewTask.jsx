@@ -17,7 +17,7 @@ const AddNewTask = () => {
 				Add Task
 			</button>
 
-			{/* TaskFromOpu */}
+			{/* TaskFrom open popup */}
 			<PopUp
 				isOpen={isPopupOpen}
 				onClosePopup={() => {

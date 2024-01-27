@@ -15,6 +15,7 @@ const TasksSearch = () => {
 					<input
 						type="search"
 						id="search-dropdown"
+						value={search_text}
 						className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
 						placeholder="Search Task"
 						onChange={(e) =>

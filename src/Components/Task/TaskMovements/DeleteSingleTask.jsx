@@ -24,7 +24,7 @@ const DeleteSingleTask = ({ task_title, task_id }) => {
 				Delete
 			</button>
 
-			{/* TaskFromOpu */}
+			{/* Confirmation popup */}
 			<PopUp
 				isOpen={isPopupOpen}
 				onClosePopup={() => {

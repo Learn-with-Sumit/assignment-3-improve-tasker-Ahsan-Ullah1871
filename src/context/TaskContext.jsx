@@ -25,24 +25,8 @@ const TaskProvider = ({ children }) => {
 	);
 	const [search_text, setSearchText] = useState("");
 
-	// search task by title
-	const searchBokHandler = (task) => {
-		if (search_text !== "" || search_text.length > 0) {
-			return task.title
-				.replace(/\s+/g, "")
-				.toUpperCase()
-				.includes(
-					search_text.replace(/\s+/g, "").toUpperCase()
-				);
-		} else {
-			return task;
-		}
-	};
-
 	return (
-		<TaskListContext.Provider
-			value={tasks_list.filter(searchBokHandler)}
-		>
+		<TaskListContext.Provider value={tasks_list}>
 			<TaskSearchContext.Provider
 				value={{ search_text, setSearchText }}
 			>

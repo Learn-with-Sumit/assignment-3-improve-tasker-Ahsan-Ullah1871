@@ -56,7 +56,7 @@ const NewTaskForm = ({ closeForm }) => {
 					type: "error",
 					message: `Please enter the value of ${key} field`,
 				});
-
+				document.getElementById(key).focus();
 				break;
 			} else {
 				check_items++;

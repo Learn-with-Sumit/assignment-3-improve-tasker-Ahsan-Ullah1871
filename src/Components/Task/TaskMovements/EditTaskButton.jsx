@@ -19,7 +19,7 @@ const EditTaskButton = ({ task }) => {
 				Edit
 			</button>
 
-			{/* TaskFromOpu */}
+			{/* Edit task form open */}
 			<PopUp
 				isOpen={isPopupOpen}
 				onClosePopup={() => {

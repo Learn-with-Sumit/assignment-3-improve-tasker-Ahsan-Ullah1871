@@ -1,8 +1,7 @@
 import { useTaskList } from "../../../context/TaskContext";
 import TaskRow from "./TaskRow";
 
-const TaskListTableBody = () => {
-	const tasks = useTaskList();
+const TaskListTableBody = ({ tasks }) => {
 	return (
 		<tbody>
 			{tasks?.map((task) => (

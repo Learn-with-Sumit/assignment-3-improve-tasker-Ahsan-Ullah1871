@@ -1,17 +1,24 @@
 import InfoCard from "../../containers/InfoCard";
-import { useTaskList } from "../../context/TaskContext";
+import { useTaskList, useTaskSearch } from "../../context/TaskContext";
+import { searchTaskHandler } from "../../utils/Search";
 import TaskListTableBody from "./TaskTable/TaskListTableBody";
 import TaskListTableHeader from "./TaskTable/TaskListTableHeader";
 
 const TaskList = () => {
 	const tasks = useTaskList();
+	const { search_text } = useTaskSearch();
+
+	// task list after search
+	let task_list = tasks?.filter((task) =>
+		searchTaskHandler(task, search_text)
+	);
 
 	return (
 		<div className="overflow-auto">
-			{tasks?.length > 0 ? (
+			{task_list?.length > 0 ? (
 				<table className="table-fixed overflow-auto xl:w-full">
 					<TaskListTableHeader />
-					<TaskListTableBody />
+					<TaskListTableBody tasks={task_list} />
 				</table>
 			) : (
 				<InfoCard
