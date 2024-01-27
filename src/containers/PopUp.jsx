@@ -1,35 +1,33 @@
 /* eslint-disable react/prop-types */
 
-const PopUp = ({ children, isOpen, onClosePopup, open_style, close_style }) => {
+import { SVGICONS } from "../constants/Icons";
+
+const PopUp = ({
+	children,
+	isOpen,
+	onClosePopup,
+	open_style,
+	close_style,
+	children_component_style,
+}) => {
 	return (
 		<div
-			className={`  fixed top-0 left-0 right-0 w-screen h-screen overflow-y-auto bg-white z-[60] bg-opacity-30 !mx-0 ${
+			className={`  fixed top-0 left-0 right-0 w-screen h-screen overflow-y-auto bg-white z-[60] bg-opacity-30 !mx-0 flex  py-10  ${
 				isOpen ? open_style : close_style
 			}  duration-500`}
 		>
-			<button
-				className=" absolute  right-10 top-0 p-3 hover:text-red-400 duration-300 "
-				onClick={(e) => {
-					e.stopPropagation();
-					onClosePopup();
-				}}
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					strokeWidth="1.5"
-					stroke="currentColor"
-					className="w-16 h-16"
+			<div className={children_component_style}>
+				<button
+					className=" absolute  text-red-400 right-2 top-0 p-3 hover:text-red-600 duration-300 "
+					onClick={(e) => {
+						e.stopPropagation();
+						onClosePopup();
+					}}
 				>
-					<path
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-					/>
-				</svg>
-			</button>
-			{children}
+					{SVGICONS.close_circle}
+				</button>
+				{children}
+			</div>
 		</div>
 	);
 };

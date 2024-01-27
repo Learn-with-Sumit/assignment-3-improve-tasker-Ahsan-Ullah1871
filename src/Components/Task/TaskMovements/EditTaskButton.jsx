@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useTaskDispatch } from "../../../context/TaskContext";
 import PopUp from "../../../containers/PopUp";
 import TaskEditForm from "../TaskEditForm";
+import Alert from "../../../containers/Alert";
+import { useAlert } from "../../../context/AlertContext";
 
 const EditTaskButton = ({ task }) => {
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const handleOpenAlert = useAlert();
 
 	return (
 		<>
@@ -23,10 +26,19 @@ const EditTaskButton = ({ task }) => {
 					setIsPopupOpen(!isPopupOpen);
 				}}
 				open_style={"translate-x-[0%]"}
-				close_style={"translate-x-[100%]"}
+				close_style={"-translate-x-[100%]"}
+				children_component_style={
+					" max-w-[740px] w-full h-auto  relative mx-auto my-auto"
+				}
 			>
 				<TaskEditForm
-					closeForm={() => setIsPopupOpen(false)}
+					closeForm={() => {
+						setIsPopupOpen(false);
+						handleOpenAlert({
+							message: "Task updated successfully",
+							type: "success",
+						});
+					}}
 					selected_task={task}
 				/>
 			</PopUp>

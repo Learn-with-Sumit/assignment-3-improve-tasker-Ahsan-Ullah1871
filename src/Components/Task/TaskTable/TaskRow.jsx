@@ -1,6 +1,6 @@
 import { useTaskDispatch } from "../../../context/TaskContext";
 import { priorities_labels, priority_list } from "../../../utils/PriorityList";
-import { random_colors } from "../../../utils/RandomColors";
+import { random_colors, selectColorForTag } from "../../../utils/RandomColors";
 import DeleteSingleTask from "../TaskMovements/DeleteSingleTask";
 import EditTaskButton from "../TaskMovements/EditTaskButton";
 import TaskComplete from "../TaskMovements/TaskComplete";
@@ -22,14 +22,10 @@ const TaskRow = ({ task }) => {
 						return (
 							<li key={tag}>
 								<span
-									className={`inline-block h-5 whitespace-nowrap rounded-[45px]  px-2.5 text-sm capitalize text-[#F4F5F6] ${
-										random_colors[
-											Math.floor(
-												Math.random() *
-													9
-											)
-										]
-									}`}
+									className={`inline-block h-5 whitespace-nowrap rounded-[45px]  px-2.5 text-sm capitalize text-[#F4F5F6]`}
+									style={selectColorForTag(
+										tag
+									)}
 								>
 									{tag}
 								</span>
@@ -43,7 +39,10 @@ const TaskRow = ({ task }) => {
 			</td>
 			<td>
 				<div className="flex items-center justify-center space-x-3">
-					<DeleteSingleTask task_id={task.id} />
+					<DeleteSingleTask
+						task_title={task?.title}
+						task_id={task.id}
+					/>
 					<EditTaskButton task={task} />
 				</div>
 			</td>

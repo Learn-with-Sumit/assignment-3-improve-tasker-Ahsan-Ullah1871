@@ -11,7 +11,7 @@ const TaskForm = ({
 	};
 	return (
 		<form
-			className="mx-auto my-10 w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11"
+			className="mx-auto   w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4   lg:p-11"
 			onSubmit={onFormSubmit}
 		>
 			<h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]">
@@ -26,7 +26,6 @@ const TaskForm = ({
 						type="text"
 						name="title"
 						id="title"
-						required
 						value={task_state?.title}
 						onChange={(e) =>
 							updateHandler({
@@ -46,7 +45,6 @@ const TaskForm = ({
 						type="text"
 						name="description"
 						id="description"
-						required
 						value={task_state?.description}
 						onChange={(e) =>
 							updateHandler({
@@ -65,7 +63,6 @@ const TaskForm = ({
 							type="text"
 							name="tags"
 							id="tags"
-							required
 							value={task_state?.tags}
 							onChange={(e) =>
 								updateHandler({
@@ -85,7 +82,6 @@ const TaskForm = ({
 							className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
 							name="priority"
 							id="priority"
-							required
 							onChange={(e) =>
 								updateHandler({
 									key_name: "priority",
